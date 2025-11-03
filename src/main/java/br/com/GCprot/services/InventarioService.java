@@ -32,8 +32,8 @@ public class InventarioService {
 
     @Transactional
     public boolean deleteInventario(int inventarioId) {
-        Inventario inventario = inventarioRepository.findById(inventarioRepository)
-                .orElseThrow(() -> new RuntimeException("Erro ao encontrar usuário para deletar"));
+        Object inventario = inventarioRepository.findById(inventarioRepository)
+                .orElseThrow() -> new RuntimeException("Erro ao encontrar usuário para deletar"));
         inventarioRepository.delete(inventario);
         return true;
     }
@@ -47,4 +47,5 @@ public class InventarioService {
     public List<Inventario> readInventarioAll() {
         return inventarioRepository.findAll();
     }
+
 }
