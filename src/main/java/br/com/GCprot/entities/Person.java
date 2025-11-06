@@ -12,14 +12,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import javax.xml.crypto.Data;
 import java.time.Instant;
 import java.util.Date;
 
 @Entity
 @Table(name = "pessoa")
 
-public class Pessoa
+public class Person
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +28,10 @@ public class Pessoa
     private String email;
     private String password;
 
-    public Pessoa() {
+    public Person() {
     }
 
-    public Pessoa(int id, String name, String email, String password, Instant createAt, Instant updatedAt) {
+    public Person(int id, String name, String email, String password, Instant createAt, Instant updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;

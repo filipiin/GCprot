@@ -1,0 +1,11 @@
+--CREATE TABLE IF NOT EXISTS employee (
+--  id INT NOT NULL AUTO_INCREMENT,
+--  id_person INT NOT NULL,
+--  PRIMARY KEY (id),
+--  INDEX fk_employee_person_idx (id_person ASC) VISIBLE,
+--  CONSTRAINT fk_employee_person
+--    FOREIGN KEY (id_person)
+--    REFERENCES person (id)
+--    ON DELETE CASCADE -- Se a 'person' for deletada, o 'employee' também é
+--    ON UPDATE CASCADE
+--) ENGINE=InnoDB;

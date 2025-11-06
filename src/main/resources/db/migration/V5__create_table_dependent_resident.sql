@@ -1,0 +1,11 @@
+--CREATE TABLE IF NOT EXISTS dependent_resident (
+--  id INT NOT NULL AUTO_INCREMENT,
+--  id_resident INT NOT NULL,
+--  PRIMARY KEY (id),
+--  INDEX fk_dependent_resident_idx (id_resident ASC) VISIBLE,
+--  CONSTRAINT fk_dependent_resident
+--    FOREIGN KEY (id_resident)
+--    REFERENCES resident (id)
+--    ON DELETE CASCADE -- Se o 'resident' for deletado, o dependente também é
+--    ON UPDATE CASCADE
+--) ENGINE=InnoDB;

@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 
 @Entity // 💡 Avisa ao JPA que esta classe é uma tabela
 @Table(name = "unidade") // 💡 Define o nome da tabela no MySQL
-public class Unidade {
+public class Unit {
 
     @Id // 💡 Avisa que ESTE é o campo de Chave Primária
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 💡 Pede ao MySQL para autoincrementar o valor (1, 2, 3...)
@@ -25,7 +25,7 @@ public class Unidade {
     // Construtor, createAt e updatedAt removidos por enquanto para simplificar
 
     // 💡 IMPORTANTE: Construtor padrão (vazio) exigido pelo JPA
-    public Unidade() {
+    public Unit() {
     }
 
     // Getters e Setters (agora corretos)

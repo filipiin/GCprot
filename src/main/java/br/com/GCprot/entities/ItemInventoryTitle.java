@@ -1,4 +1,4 @@
 package br.com.GCprot.entities;
 
-public class TipoGestor {
+public class ItemInventoryTitle {
 }

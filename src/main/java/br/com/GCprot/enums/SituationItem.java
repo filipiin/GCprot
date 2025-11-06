@@ -1,9 +1,10 @@
 package br.com.GCprot.enums;
 
-public enum SituacaoItem {
+public enum SituationItem {
     AVARIADO,
     RUIM,
     BOM,
     EXCELENTE,
     EM_MANUTENÇÃO,
+    ;
 }

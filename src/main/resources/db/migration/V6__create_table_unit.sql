@@ -1,0 +1,11 @@
+--CREATE TABLE IF NOT EXISTS unit (
+--  id INT NOT NULL AUTO_INCREMENT,
+--  id_resident INT NOT NULL,
+--  PRIMARY KEY (id),
+--  INDEX fk_unit_resident_idx (id_resident ASC) VISIBLE,
+--  CONSTRAINT fk_unit_resident
+--    FOREIGN KEY (id_resident)
+--    REFERENCES resident (id)
+--    ON DELETE CASCADE -- Se o 'resident' for deletado, o vínculo com a unidade é desfeito
+--    ON UPDATE CASCADE
+--) ENGINE=InnoDB;

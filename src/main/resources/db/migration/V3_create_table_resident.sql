@@ -1,0 +1,5 @@
+CREATE TABLE resident (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_person INT NOT NULL,
+  FOREIGN KEY (id_person) REFERENCES person(id) ON DELETE CASCADE
+);
