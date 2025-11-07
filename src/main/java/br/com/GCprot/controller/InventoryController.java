@@ -1,7 +1,7 @@
 package br.com.GCprot.controller;
 
 import br.com.GCprot.entities.Inventory;
-import br.com.GCprot.entities.ItemInventory; // 1. Importe a entidade ItemInventory
+import br.com.GCprot.entities.ItemInventory;
 import br.com.GCprot.services.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inventory") // URL base
+@RequestMapping("/inventory")
 public class InventoryController {
 
     @Autowired
@@ -28,12 +28,12 @@ public class InventoryController {
     }
 
     @GetMapping("/list")
-    public List<Inventory> ListAll() {
+    public List<Inventory> listInventoryAll() {
         return inventoryService.readInventoryAll();
     }
 
-    @GetMapping("/list")
-    public List<ItemInventory> ListAll() {
+    @GetMapping("/item/list/")
+    public List<ItemInventory> listItemInventoryAll() {
         return inventoryService.readItemInventoryAll();
     }
 
@@ -42,36 +42,28 @@ public class InventoryController {
         return new ResponseEntity<>(inventoryService.updateInventory(inventoryUpdate), HttpStatus.OK);
 
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<ItemInventory> updateItemInventory(@RequestBody ItemInventory item) {
-        return new ResponseEntity<>(inventoryService.updateInventory(item), HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Inventory> getInventoryById(@PathVariable(name = "id")int id) {
-        Inventory inventory = inventoryService.findById(id);
-        return new ResponseEntity<>(inventory, HttpStatus.OK);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Inventory> updateInventory(@RequestBody Inventory inventoryUpdate) {
-        Inventory inventory = inventoryService.updateInventory(inventoryUpdate); // Mudei o nome
-        return new ResponseEntity<>(inventory, HttpStatus.OK);
+    @PutMapping("/item/{id}")
+    public ResponseEntity<ItemInventory> updateItemInventory(@RequestBody ItemInventory itemUpdate) {
+        return new ResponseEntity<>(inventoryService.updateItemInventory(itemUpdate), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteInventory(@PathVariable int id) {
-        inventoryService.deleteInventory(id); // Mudei o nome
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Boolean> deleteInventory(@PathVariable(name = "id")  int id) {// Mudei o nome
+        return new ResponseEntity<>(inventoryService.deleteInventory(id), HttpStatus.NO_CONTENT);
     }
 
-
-
-        Inventory updatedInventory = inventoryService.addItemToInventory(inventoryId, item);
-        return new ResponseEntity<>(updatedInventory, HttpStatus.OK);
+    @DeleteMapping("/item/{id}")
+    public ResponseEntity<Boolean> deleteItemInventory(@PathVariable(name = "id") int item_id) {// Mudei o nome
+        return new ResponseEntity<>(inventoryService.deleteItemInventory(item_id), HttpStatus.NO_CONTENT);
     }
 
-        Inventory updatedInventory = inventoryService.removeItemFromInventory(inventoryId, name, quantity);
-        return new ResponseEntity<>(updatedInventory, HttpStatus.OK);
+    @GetMapping("{id}")
+    public ResponseEntity<Inventory> readInventory(@PathVariable(name = "id")int id){
+        return new ResponseEntity<>(inventoryService.readInventory(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/item/{id}")
+    public ResponseEntity<ItemInventory> readItemInventory(@PathVariable(name = "id")int item_id){
+        return new ResponseEntity<>(inventoryService.readItemInventory(item_id), HttpStatus.OK);
     }
 }

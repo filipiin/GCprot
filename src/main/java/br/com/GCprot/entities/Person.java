@@ -16,26 +16,31 @@ import java.time.Instant;
 import java.util.Date;
 
 @Entity
-@Table(name = "pessoa")
+@Table(name = "person")
 
 public class Person
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date data_nascimento; //Long ou int?
+    private int cpf;
+    private Date dateOfBith; //Long ou int?
     private String name;
     private String email;
-    private String password;
+    private Instant createdAt;
+    private Instant updatedAt;
 
     public Person() {
     }
 
-    public Person(int id, String name, String email, String password, Instant createAt, Instant updatedAt) {
+    public Person(int id, int cpf, Date dateOfBith, String name, String email, Instant createdAt, Instant updatedAt) {
         this.id = id;
+        this.cpf = cpf;
+        this.dateOfBith = dateOfBith;
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
     public int getId() {
         return id;
@@ -46,17 +51,26 @@ public class Person
     public void setName(String name){
         this.name = name;
     }
+    public int getCpf(){
+        return cpf;
+    }
+    public void setCpf(int cpf){ this.cpf = cpf; }
+    public Date getDateOfBith(){
+        return dateOfBith;
+    }
+    public void setDateOfBith(Date dateOfBith){
+        this.dateOfBith = dateOfBith;
+    }
     public String getEmail(){
         return email;
     }
     public void setEmail(String email){
         this.email = email;
     }
-    public String getPassword(){
-        return password;
+    public Instant getCreateAt() {
+        return createdAt;
     }
-    public void setPassword(String password){
-        this.password = password;
+    public Instant getUpdatedAt() {
+        return updatedAt;
     }
-
 }
