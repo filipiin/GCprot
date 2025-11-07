@@ -22,8 +22,9 @@ public class PersonService {
         Person personBank = personRepository.findById(personUpdated.getId())
                 .orElseThrow(() -> new RuntimeException("Erro ao encontrar usuário para atualizar"));
         personBank.setName(personUpdated.getName());
+        personBank.setCpf(personUpdated.getCpf());
+        personBank.setDateOfBith(personUpdated.getDateOfBith());
         personBank.setEmail(personUpdated.getEmail());
-        personBank.setPassword(personUpdated.getPassword());
 
         return personRepository.save(personBank);
     }

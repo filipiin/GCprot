@@ -17,14 +17,11 @@ public class InventoryService {
     @Autowired
     private InventoryRepository inventoryRepository;
 
-    @Autowired
-    private ItemInventoryRepository itemInventoryRepository;
-
-
     public Inventory createInventory(Inventory inventory) {
         return inventoryRepository.save(inventory);
     }
 
+    @Transactional
     public Inventory updateInventory(Inventory inventory) {
         Inventory inventoryUpdate = inventoryRepository.findById(inventory.getId())
                 .orElseThrow(() -> new RuntimeException("Erro ao encontrar inventário para atualizar."));
@@ -34,7 +31,6 @@ public class InventoryService {
         return inventoryRepository.save(inventoryUpdate);
     }
 
-    @Transactional
     public boolean deleteInventory(int inventoryId) {
         Inventory inventory = inventoryRepository.findById(inventoryId)
                 .orElseThrow(() -> new RuntimeException("Erro ao encontrar inventário para deletar."));
@@ -49,30 +45,28 @@ public class InventoryService {
     }
 
     public List<Inventory> readInventoryAll() {
-        return inventoryRepository.findAll();
+        return inventoryRepository.findAll().stream().toList();
     }
+
+    @Autowired
+    private ItemInventoryRepository itemInventoryRepository;
 
     public ItemInventory createItemInventory(ItemInventory item) {
         return itemInventoryRepository.save(item);
     }
 
-    public List<ItemInventory> readItemInventoryAll() {
-        return itemInventoryRepository.findAll();
-    }
-
-    public ItemInventory updateItemInventory( ItemInventory itemUpdate) {
-
-        ItemInventory item = itemInventoryRepository.findById(itemUpdate.id()).orElseThrow(() -> new RuntimeException("error search product"));
-        item.setName(itemUpdate.name());
-        item.setDescription(itemUpdate.description());
-        item.setSituation(itemUpdate.situation());
-        item.setQuantity(itemUpdate.quantity());
-        item.setValue(itemUpdate.value());
-        return itemInventoryRepository.save(item);
-
-    }
-
     @Transactional
+    public ItemInventory updateItemInventory(ItemInventory itemUpdate) {
+        ItemInventory item = itemInventoryRepository.findById(itemUpdate.getId()).orElseThrow(() -> new RuntimeException("Erro ao encontrar inventário para atualizar."));
+
+        item.setName(itemUpdate.getName());
+        item.setSituation(itemUpdate.getSituation());
+        item.setDescription(itemUpdate.getDescription());
+        item.setQuantity(itemUpdate.getQuantity());
+        item.setValue(itemUpdate.getValue());
+        return itemInventoryRepository.save(item);
+    }
+
     public boolean deleteItemInventory(int id) {
         ItemInventory item = itemInventoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Erro ao encontrar item de inventário para deletar. ID: " + id));
@@ -81,13 +75,11 @@ public class InventoryService {
     }
 
     public ItemInventory readItemInventory(int id) {
-        ItemInventory item = itemInventoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Erro ao encontrar item de inventário para ler. ID: " + id));
+        ItemInventory item = itemInventoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Erro ao encontrar item de inventário para ler."));
         return item;
     }
-    public List<Inventory> readInventoryAll() {
-        return inventoryRepository.findAll();
+
+    public List<ItemInventory> readItemInventoryAll() {
+        return itemInventoryRepository.findAll();
     }
-
-
 }

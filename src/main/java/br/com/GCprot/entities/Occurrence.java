@@ -13,19 +13,22 @@ public class Occurrence {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
         private String description;
-        private int typeoccurrance;
+        private Instant createdAt;
+        private Instant updatedAt;
 
         @Enumerated(EnumType.STRING)
-        private TypeOccurrance typeoccurrance;
+        private TypeOccurrance type;
 
 
     public Occurrence() {
     }
 
-    public Occurrence(int id, TypeOccurrance typeoccurrance, String description, Instant createAt, Instant updatedAt) {
+    public Occurrence(int id, TypeOccurrance type, String description, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.description = description;
-        this.typeoccurrance = typeoccurrance;
+        this.type = type;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
     public Integer getId() {
         return id;
@@ -36,11 +39,11 @@ public class Occurrence {
         public void setDescription(String description) {
         this.description = description;
     }
-    public String getTypeOccurrance() {
-        return typeoccurrance();
+    public TypeOccurrance getType() {
+        return type;
     }
-    public void setTypeOccurrance(int typeoccurrance) {
-        this.typeoccurrance = typeoccurrance;
+    public void setType(TypeOccurrance type) {
+        this.type = type;
     }
 
 }

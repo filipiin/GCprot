@@ -1,78 +1,84 @@
 package br.com.GCprot.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import br.com.GCprot.enums.BlockUnit;
+import br.com.GCprot.enums.SituationUnit;
+import jakarta.persistence.*;
 
-// import java.time.Instant; // Não estamos usando por enquanto
+import java.time.Instant;
 
-@Entity // 💡 Avisa ao JPA que esta classe é uma tabela
-@Table(name = "unidade") // 💡 Define o nome da tabela no MySQL
+
+@Entity
+@Table(name = "unit")
 public class Unit {
 
-    @Id // 💡 Avisa que ESTE é o campo de Chave Primária
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 💡 Pede ao MySQL para autoincrementar o valor (1, 2, 3...)
-    private int id; // ✅ O ID deve ser numérico para usar IDENTITY
+    @Id //
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    private String proprietario;
-    private String rua;
-    private int quadrante;
-    private int numUnidade;
-    private int situacao;
+    @Enumerated(EnumType.STRING)
+    private BlockUnit block;
 
-    // Construtor, createAt e updatedAt removidos por enquanto para simplificar
+    @Enumerated(EnumType.STRING)
+    private SituationUnit situation;
 
-    // 💡 IMPORTANTE: Construtor padrão (vazio) exigido pelo JPA
+    @OneToMany
+    @JoinColumn(name = "resident_id")
+
+    private int num;
+    private String street;
+    private Instant createdAt;
+    private Instant updatedAt;
+
     public Unit() {
     }
 
-    // Getters e Setters (agora corretos)
-
-    public int getId() {
-        return id;
+    public Unit(int id, int num, String street, BlockUnit block, SituationUnit situation, Instant createdAt, Instant updatedAt) {
+        this.id = id;
+        this.num = num;
+        this.street = street;
+        this.block = block;
+        this.situation = situation;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    // Não precisamos de um setId(), pois o banco vai gerenciá-lo
+    public int getId() { return id; }
 
-    public String getRua() {
-        return rua;
+    public String getStreet() {
+        return street;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String getProprietario() {
-        return proprietario;
+    public BlockUnit getBlock() {
+        return block;
     }
 
-    public void setProprietario(String proprietario) {
-        this.proprietario = proprietario;
+    public void setBlock(BlockUnit block) {
+        this.block = block;
     }
 
-    public int getQuadrante() {
-        return quadrante;
+    public SituationUnit getSituation() {
+        return situation;
     }
 
-    public void setQuadrante(int quadrante) { // ✅ Corrigido para retornar 'void'
-        this.quadrante = quadrante;
+    public void setSituation(SituationUnit situation) {
+        this.situation = situation;
     }
 
-    public int getSituacao() {
-        return situacao;
+    public int getNum() { return num; }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
-    public void setSituacao(int situacao) { // ✅ Corrigido para retornar 'void'
-        this.situacao = situacao;
+    public Instant getCreateAt() {
+        return createdAt;
     }
 
-    public int getNumUnidade() {
-        return numUnidade;
-    }
-
-    public void setNumUnidade(int numUnidade) {
-        this.numUnidade = numUnidade;
+    public Instant getUpdatedAt() {
+        return updatedAt;
     }
 }

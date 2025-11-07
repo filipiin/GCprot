@@ -29,39 +29,28 @@ public class PersonController {
         return new ResponseEntity<>(person, HttpStatus.CREATED);
     }
 
-    // --- Endpoint de LEITURA (Read) - Todos ---
-    // HTTP GET -> http://localhost:8080/unidades
     @GetMapping
     public ResponseEntity<List<Person>> searchAllPersons() {
         List<Person> people = personService.readPersonAll();
         return new ResponseEntity<>(people, HttpStatus.OK); // OK (200)
     }
 
-    // --- Endpoint de LEITURA (Read) - Por ID ---
-    // HTTP GET -> http://localhost:8080/unidades/5 (por exemplo)
     @GetMapping("/{id}")
     public ResponseEntity<Person> searchPersonById(@PathVariable int id) {
-        //  @PathVariable: Pega o 'id' que veio na URL (o '5' do exemplo) e coloca na variável 'int id'
         Person person = personService.readPerson(id);
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
-    // --- Endpoint de ATUALIZAÇÃO (Update) ---
-    // HTTP PUT -> http://localhost:8080/unidades
     @PutMapping
     public ResponseEntity<Person> updatePerson(@RequestBody Person person) {
-        //  @RequestBody: Pega o JSON com os dados da unidade para atualizar
         Person personUpdated = personService.updatePerson(person);
         return new ResponseEntity<>(personUpdated, HttpStatus.OK);
     }
 
-    // --- Endpoint de DELEÇÃO (Delete) ---
-    // HTTP DELETE -> http://localhost:8080/unidades/5 (por exemplo)
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePerson(@PathVariable int id) {
-        //  @PathVariable: Pega o 'id' da URL para saber quem deletar
+    public ResponseEntity<Void> deletePerson(@PathVariable(name = "id") int id) {
         personService.deletePerson(id);
-        //  Para delete, não retornamos conteúdo (void) e status NO_CONTENT (204)
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
